@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CitiesListComponent from './components/cities.list.component';
+import ForecastCityList from './components/forecast.city.list';
+class App extends React.Component{
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    constructor(props:{}) {
+        super(props);
+        this.state = {
+            active_city:0
+        }
+    }
+
+
+    render(){
+        return (
+            <div className="">
+                <header className="App-header">
+                    <h1>Reto Climas</h1>
+                </header>
+                <div className="row">
+                    <CitiesListComponent
+                        // @ts-ignore
+                        select={(id)=>{
+                            this.setState({
+                                active_city: id,
+                            })
+                        }}
+                    />
+                    <ForecastCityList
+                        // @ts-ignore
+                        id = {this.state.active_city}    
+                    />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
